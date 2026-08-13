@@ -228,3 +228,21 @@ Atualizações futuras: `git fetch upstream && git merge upstream/main`.
 **Por que o merge tende a ficar limpo:** consequência direta da separação já estabelecida entre engenharia (seção 4 — `docs/`, `claude-user/`, `scripts/`, `.claude/`) e conteúdo pessoal (`MIND.md` preenchido + nós). O template nunca toca os arquivos de conteúdo da pessoa; a pessoa normalmente não edita os arquivos de engenharia. Como os dois lados do merge tocam arquivos diferentes, o git resolve sozinho na maioria das vezes.
 
 **Ponto de atrito conhecido:** `.claude/settings.json` (seção 4) acumula permissões liberadas ao longo do uso — é o único arquivo de engenharia que a pessoa também edita organicamente. Se o template mudar esse arquivo e a pessoa também tiver mudado, o merge pode conflitar ali. Raro e de resolução simples (arquivo pequeno) — não justifica um mecanismo mais complexo (submodule/subtree).
+
+---
+
+## 13. Manutenção periódica (otimização do vault)
+
+**Decisão:** anotações acumulam histórico redundante com o tempo — tarefa concluída sem lição durável, fato duplicado entre nós, detalhe operacional que só importava no momento em que foi feito. Por isso vale ter uma rotina de otimização periódica (cadência sugerida: semanal) que **sempre pergunta antes de rodar** — nunca edita o vault por conta própria sem confirmação da rodada.
+
+**Mecanismo sugerido:** mesmo padrão já usado pra `config.md` (seção 4) — um hook `SessionStart` em `.claude/settings.json` (nível projeto, dispara quando o `mind` é o projeto ativo). A cada início de conversa, um comando local lê a última data registrada em `docs/MANUTENCAO.md` (log de execuções — não é nó de conhecimento, não segue o frontmatter da seção 5) e calcula há quantos dias ela foi. Se já passou o intervalo escolhido, injeta contexto instruindo o Claude a perguntar ao usuário, logo no início da conversa, se pode rodar uma nova otimização — só executa se ele confirmar. Não depende de nuvem, GitHub conectado ou processo externo: roda como qualquer outro hook local do repo, e só é checado quando o vault de fato é aberto (mesma limitação já aceita pelo hook do `config.md`).
+
+**Critérios de corte/reorganização, uma vez confirmada a rodada:**
+- Itens concluídos (`[x]`) cujo relato só documenta um evento pontual já resolvido, sem decisão/motivo que ainda importe daqui pra frente — compactar ou remover.
+- Informação duplicada entre dois ou mais nós — manter só a fonte principal, os demais passam a referenciar por link (mesmo princípio de não duplicar da seção 3).
+- Detalhe operacional excessivo (sequência exata de comandos, passo a passo de como algo foi feito) quando só o resultado/decisão interessa daqui pra frente.
+- **Nunca remove:** itens de tarefa ainda abertos (`tarefas/`), decisões com racional ainda referenciado por outro nó, ou qualquer conteúdo fora desses três critérios.
+
+**Registro:** cada rodada (manual ou via rotina) deixa uma linha em `docs/MANUTENCAO.md` com data e resumo do que mudou — é essa data que a próxima checagem usa como referência.
+
+**Aprovação:** por padrão, uma vez confirmada a rodada em si, a otimização edita os nós diretamente e resume as mudanças ao final (não pede aprovação item a item) — commit continua sendo decisão manual, como qualquer mudança no vault (seção 7).
