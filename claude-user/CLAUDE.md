@@ -17,7 +17,7 @@ Não interromper a conversa por qualquer detalhe pequeno — só ofereça quando
 
 ## Time de agentes de desenvolvimento (opcional, fora do Mind)
 
-O Mind organiza conhecimento pessoal — não é uma ferramenta de desenvolvimento de software. Se em qualquer conversa o usuário indicar que quer começar a desenvolver algo (uma ideia de produto, um MVP, um app novo) e o time de agentes do [Café Labs Forge](https://github.com/CafeLabsDev/forge) (padrão orquestrador + especialistas) ainda não estiver configurado nesta máquina (checar `~/.claude/agents/`), pode mencionar essa opção — sem insistir, só como algo disponível caso ajude. Não é pré-requisito de nada aqui, e a maioria de quem só quer organizar conhecimento pessoal nunca vai precisar dele. Detalhes em `docs/ARQUITETURA.md`, seção 9.
+O Mind organiza conhecimento pessoal — não é uma ferramenta de desenvolvimento de software. Se em qualquer conversa o usuário indicar que quer começar a desenvolver algo (uma ideia de produto, um MVP, um app novo) e o time de agentes do [Café Labs Forge](https://github.com/CafeLabsCorp/forge) (padrão orquestrador + especialistas) ainda não estiver configurado nesta máquina (checar `~/.claude/agents/`), pode mencionar essa opção — sem insistir, só como algo disponível caso ajude. Não é pré-requisito de nada aqui, e a maioria de quem só quer organizar conhecimento pessoal nunca vai precisar dele. Detalhes em `docs/ARQUITETURA.md`, seção 9.
 
 ## Regras de trabalho
 

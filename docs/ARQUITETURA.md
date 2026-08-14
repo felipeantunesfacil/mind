@@ -164,7 +164,7 @@ subagentes pra desenvolver software. Se além de usar o Mind você também const
 produtos/MVPs (apps, sites, etc.) e quer um padrão de agentes especializados
 (orquestrador + especialistas — produto, design, mobile, backend, devops, QA, etc.)
 pra acelerar esse trabalho, existe um complemento pronto e opcional pra isso:
-[Café Labs Forge](https://github.com/CafeLabsDev/forge) — extraído e generalizado de
+[Café Labs Forge](https://github.com/CafeLabsCorp/forge) — extraído e generalizado de
 um setup real usado em produção, sem referência a nenhum produto/empresa específico.
 
 É totalmente desacoplado do Mind: vive no próprio repositório, com seu próprio script
@@ -173,7 +173,7 @@ apontando pra `~/.claude/agents/`), e não depende do Mind pra funcionar (nem
 vice-versa). Configurar:
 
 ```bash
-git clone https://github.com/CafeLabsDev/forge.git forge
+git clone https://github.com/CafeLabsCorp/forge.git forge
 cd forge
 ./scripts/setup-symlinks.sh
 ```
@@ -204,7 +204,7 @@ organizar conhecimento pessoal provavelmente nunca vai precisar dele.
 - **Validação end-to-end da captura fora do projeto mind**: confirmar que, numa conversa dentro de outro projeto ativo, o gatilho de fato oferece salvar e a escrita funciona ponta a ponta.
 
 ~~Time de subagentes especializados para desenvolvimento~~ — resolvido via o
-complemento opcional [Café Labs Forge](https://github.com/CafeLabsDev/forge), ver
+complemento opcional [Café Labs Forge](https://github.com/CafeLabsCorp/forge), ver
 seção 9.
 
 ---
@@ -214,7 +214,7 @@ seção 9.
 **Decisão:** quem clona este template pra começar o próprio vault deve configurá-lo como um fork "manual" via git — dois remotes, `upstream` (este repo) e `origin` (o repo privado da pessoa) — em vez de gerar o repo pelo botão "Use this template" do GitHub.
 
 ```bash
-git clone git@github.com:CafeLabsDev/mind-template.git mind
+git clone git@github.com:CafeLabsCorp/mind-template.git mind
 cd mind
 git remote rename origin upstream
 git remote add origin <repo-privado-da-pessoa>
