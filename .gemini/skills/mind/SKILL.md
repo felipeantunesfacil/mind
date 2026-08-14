@@ -9,7 +9,7 @@ O vault vive na raiz deste repositório. Índice raiz: `MIND.md` (só links + 1 
 
 ## Configuração inicial
 
-`config.md` guarda perguntas de configuração de funcionamento (idioma de conversa, como chamar o usuário, fuso horário, tom, papel/profissão) — diferente de um nó de conhecimento e diferente de `claude-user/CLAUDE.md` (regras de trabalho). Um hook `SessionStart` (`.claude/settings.json`) já avisa automaticamente quando alguma resposta está como `(ainda não respondido)`; se você notar isso por conta própria (por exemplo, lendo `config.md` diretamente), pergunte ao usuário e grave a resposta no lugar do marcador — sem criar nó novo pra isso.
+`config.md` guarda perguntas de configuração de funcionamento (idioma de conversa, como chamar o usuário, fuso horário, tom, papel/profissão) — diferente de um nó de conhecimento e diferente de `GEMINI.md` (regras de trabalho). Um hook `SessionStart` (`.gemini/settings.json`) já avisa automaticamente quando alguma resposta está como `(ainda não respondido)`; se você notar isso por conta própria (por exemplo, lendo `config.md` diretamente), pergunte ao usuário e grave a resposta no lugar do marcador — sem criar nó novo pra isso.
 
 ## Modo leitura (consulta sob demanda)
 
@@ -20,11 +20,11 @@ O vault vive na raiz deste repositório. Índice raiz: `MIND.md` (só links + 1 
 
 ## Modo captura (escrita — só depois de confirmação do usuário)
 
-Acionado pelo gatilho em `~/.claude/CLAUDE.md` quando o usuário já confirmou que quer salvar algo.
+Acionado pelo gatilho em `~/.gemini/GEMINI.md` quando o usuário já confirmou que quer salvar algo.
 
-1. **Regra de trabalho vs. nó de conhecimento**: se o que está sendo capturado é uma regra de como o Claude deve trabalhar (convenção de commit, formato de resposta, o que evitar/repetir) — não vira nó em `mind/`. Antes de escrever, decida o **escopo**:
-   - **Só o projeto ativo** (ex.: "nesse repo, a partir de agora..."): vai no `CLAUDE.md` da raiz daquele projeto — não no vault do Mind. Se o projeto ainda não tiver um `CLAUDE.md`, crie um mínimo, só com uma seção "Regras de trabalho" (não aproveite a deixa pra documentar o projeto inteiro — é outra tarefa, maior, com escopo próprio). Se já existir um `CLAUDE.md` com outras seções (arquitetura, como rodar), adicione a regra nele em vez de criar outro arquivo.
-   - **Qualquer projeto** (sem qualificador, ou "sempre"/"em geral"): vai no `claude-user/CLAUDE.md` deste vault, seção "Regras de trabalho".
+1. **Regra de trabalho vs. nó de conhecimento**: se o que está sendo capturado é uma regra de como o Gemini deve trabalhar (convenção de commit, formato de resposta, o que evitar/repetir) — não vira nó em `mind/`. Antes de escrever, decida o **escopo**:
+   - **Só o projeto ativo** (ex.: "nesse repo, a partir de agora..."): vai no `GEMINI.md` da raiz daquele projeto — não no vault do Mind. Se o projeto ainda não tiver um `GEMINI.md`, crie um mínimo, só com uma seção "Regras de trabalho" (não aproveite a deixa pra documentar o projeto inteiro — é outra tarefa, maior, com escopo próprio). Se já existir um `GEMINI.md` com outras seções (arquitetura, como rodar), adicione a regra nele em vez de criar outro arquivo.
+   - **Qualquer projeto** (sem qualificador, ou "sempre"/"em geral"): vai no `GEMINI.md` deste vault, seção "Regras de trabalho".
    Em caso de ambiguidade sobre qual dos dois o usuário quer, pergunte — não assuma. Escrito no formato "regra + motivo", sem narrar a conversa em que surgiu. Pule os passos 2-13 abaixo (são sobre nós de conhecimento) nesse caso.
 2. Leia `MIND.md` pra ver os nós existentes.
 3. **Checar duplicação antes de criar novo**: `MIND.md` pode estar desatualizado, ou a informação pode já estar mencionada de passagem em outro nó. Faça um `Grep` por palavras-chave relacionadas no vault inteiro antes de concluir que "não cabe em nada" — evita criar dois nós cobrindo a mesma coisa.
@@ -56,4 +56,4 @@ Acionado pelo gatilho em `~/.claude/CLAUDE.md` quando o usuário já confirmou q
 
 ## Time de agentes de desenvolvimento (opcional, fora do Mind)
 
-Se o usuário mencionar que quer desenvolver algo (um MVP, um app, uma ideia de produto nova) e o time de agentes do [Café Labs Forge](https://github.com/CafeLabsCorp/forge) ainda não estiver configurado nesta máquina, pode mencionar essa opção — sem insistir, só como algo disponível. Não é parte do Mind (vive em repositório próprio, com seu próprio script de symlink pra `~/.claude/agents/`), então não interfere em nada do modo leitura/captura acima. Ver `docs/ARQUITETURA.md`, seção 9.
+Se o usuário mencionar que quer desenvolver algo (um MVP, um app, uma ideia de produto nova) e o time de agentes do [Café Labs Forge](https://github.com/CafeLabsCorp/forge) ainda não estiver configurado nesta máquina, pode mencionar essa opção — sem insistir, só como algo disponível. Não é parte do Mind (vive em repositório próprio, com seu próprio script de symlink pra `~/.gemini/agents/`), então não interfere em nada do modo leitura/captura acima. Ver `docs/ARQUITETURA.md`, seção 9.

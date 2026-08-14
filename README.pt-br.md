@@ -2,7 +2,7 @@
 
 # Mind — template
 
-Base de conhecimento pessoal organizada como uma árvore de Markdown, feita pra ser editada visualmente num editor tipo [Obsidian](https://obsidian.md) e consultada sob demanda pelo **[Claude Code](https://claude.com/claude-code)** — o CLI oficial da Anthropic. Este repositório só funciona de verdade com ele: é o `claude` rodando no seu terminal que lê a Skill e o gatilho daqui e decide quando consultar/salvar algo. Sem o Claude Code instalado, o vault é só uma pasta de Markdown comum.
+Base de conhecimento pessoal organizada como uma árvore de Markdown, feita pra ser editada visualmente num editor tipo [Obsidian](https://obsidian.md) e consultada sob demanda pelo **[Gemini CLI](https://gemini.com/gemini-code)** — o CLI oficial da Anthropic. Este repositório só funciona de verdade com ele: é o `gemini` rodando no seu terminal que lê a Skill e o gatilho daqui e decide quando consultar/salvar algo. Sem o Gemini CLI instalado, o vault é só uma pasta de Markdown comum.
 
 Este repositório é a **versão crua/template**: só a engenharia (Skill, gatilho de captura, script de symlink, docs de arquitetura), sem nenhum conteúdo pessoal. Clone, personalize e comece a preencher com seus próprios nós.
 
@@ -10,15 +10,15 @@ A arquitetura completa (por que cada decisão foi tomada, o que ainda falta) est
 
 ## Pré-requisitos
 
-- **[Claude Code](https://claude.com/claude-code) instalado** e configurado (`claude` disponível no terminal) — ver o guia oficial de instalação no link.
+- **[Gemini CLI](https://gemini.com/gemini-code) instalado** e configurado (`gemini` disponível no terminal) — ver o guia oficial de instalação no link.
 - Opcional: um editor de Markdown com suporte a grafo/backlinks, tipo [Obsidian](https://obsidian.md), pra navegar e editar os nós visualmente. Não é obrigatório — dá pra usar só com o terminal.
 
 ## O que tem aqui
 
 - **`MIND.md`**: índice raiz, começa vazio. Não existe uma árvore de pastas fixa pré-criada — os nós (e as pastas que fizerem sentido pra organizá-los) vão nascendo aos poucos, conforme as conversas.
-- **`.claude/`**: Skill e permissões que só valem quando este projeto está ativo.
-- **`claude-user/`**: o "armazém" da Skill, Subagentes e instrução de **nível usuário** — funcionam em qualquer projeto ativo, não só neste. Ficam aqui (versionados neste repo) e são espelhados em `~/.claude/` via symlink (ver abaixo).
-- **`scripts/setup-symlinks.sh`**: recria os symlinks de `claude-user/` em `~/.claude/`.
+- **`.gemini/`**: Skill e permissões que só valem quando este projeto está ativo.
+- **`.gemini/`**: o "armazém" da Skill, Subagentes e instrução de **nível usuário** — funcionam em qualquer projeto ativo, não só neste. Ficam aqui (versionados neste repo) e são espelhados em `~/.gemini/` via symlink (ver abaixo).
+- **`scripts/setup-symlinks.sh`**: recria os symlinks de `.gemini/` em `~/.gemini/`.
 - **`scripts/status-all.sh`**: varre os repos de projeto que você listar dentro dele e mostra quais têm mudança não commitada ou commit não empurrado — pra checar tudo de uma vez em vez de entrar pasta por pasta.
 
 ## Setup numa máquina nova
@@ -59,12 +59,12 @@ template" do GitHub: ele gera um histórico git desconectado do original e quebr
 
    ```bash
    ./scripts/setup-symlinks.sh
-   claude
+   gemini
    ```
 
 Pode clonar com o nome que quiser e em qualquer caminho — não há exigência de local fixo, a menos que você use uma integração por voz (ver seção abaixo).
 
-Rodar `./scripts/setup-symlinks.sh` de novo é seguro a qualquer momento (idempotente) — necessário só quando uma Skill/Subagente novo for adicionado em `claude-user/`.
+Rodar `./scripts/setup-symlinks.sh` de novo é seguro a qualquer momento (idempotente) — necessário só quando uma Skill/Subagente novo for adicionado em `.gemini/`.
 
 A partir daí é só conversar: peça pra consultar algo, ou comente algo que valha a pena guardar — a Skill e o gatilho cuidam do resto (ver seção abaixo).
 
@@ -77,17 +77,17 @@ git fetch upstream
 git merge upstream/main
 ```
 
-Isso costuma fundir sem conflito porque a arquitetura já separa o que é "engenharia" (`docs/`, `claude-user/`, `scripts/`, `.claude/`) — que só muda aqui, no template — do que é conteúdo pessoal (`MIND.md` preenchido e as pastas de nós que você for criando) — que o template nunca toca. O ponto de atrito esperado é `.claude/settings.json`: ele acumula permissões liberadas conforme o uso, então se você e o template mudarem esse arquivo ao mesmo tempo pode dar conflito de merge ali — raro, e resolve na mão sem mistério (arquivo pequeno). Mais detalhes da decisão em [docs/ARQUITETURA.md](docs/ARQUITETURA.md), seção 12.
+Isso costuma fundir sem conflito porque a arquitetura já separa o que é "engenharia" (`docs/`, `.gemini/`, `scripts/`, `.gemini/`) — que só muda aqui, no template — do que é conteúdo pessoal (`MIND.md` preenchido e as pastas de nós que você for criando) — que o template nunca toca. O ponto de atrito esperado é `.gemini/settings.json`: ele acumula permissões liberadas conforme o uso, então se você e o template mudarem esse arquivo ao mesmo tempo pode dar conflito de merge ali — raro, e resolve na mão sem mistério (arquivo pequeno). Mais detalhes da decisão em [docs/ARQUITETURA.md](docs/ARQUITETURA.md), seção 12.
 
 ## Como a captura de conhecimento funciona
 
-Durante qualquer conversa com o Claude Code, em qualquer projeto, se algo parecer um fato/decisão/preferência pessoal que valha a pena guardar, o Claude pergunta antes de salvar. Se confirmado, ele mesmo edita o nó certo (ou cria um novo) e atualiza o índice em `MIND.md`. A lógica completa está em `claude-user/CLAUDE.md` (gatilho) e `claude-user/skills/mind/SKILL.md` (procedimento).
+Durante qualquer conversa com o Gemini CLI, em qualquer projeto, se algo parecer um fato/decisão/preferência pessoal que valha a pena guardar, o Gemini pergunta antes de salvar. Se confirmado, ele mesmo edita o nó certo (ou cria um novo) e atualiza o índice em `MIND.md`. A lógica completa está em `GEMINI.md` (gatilho) e `.gemini/skills/mind/SKILL.md` (procedimento).
 
-Nada é salvo sem confirmação — e nada impede edição manual direta a qualquer momento; o Claude só lê o estado atual dos arquivos quando consultado.
+Nada é salvo sem confirmação — e nada impede edição manual direta a qualquer momento; o Gemini só lê o estado atual dos arquivos quando consultado.
 
 ## Integração por voz (opcional)
 
-É possível plugar um assistente de voz externo que resolve "projeto ativo" por voz e roda o Claude Code apontado pra ele. É totalmente opcional — sem isso, o Mind funciona normalmente só com Claude Code no teclado. Detalhes do padrão geral estão em `docs/ARQUITETURA.md`, seção 8.
+É possível plugar um assistente de voz externo que resolve "projeto ativo" por voz e roda o Gemini CLI apontado pra ele. É totalmente opcional — sem isso, o Mind funciona normalmente só com Gemini CLI no teclado. Detalhes do padrão geral estão em `docs/ARQUITETURA.md`, seção 8.
 
 ## Time de agentes de desenvolvimento (opcional)
 

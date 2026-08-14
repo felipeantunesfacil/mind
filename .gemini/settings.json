@@ -20,7 +20,7 @@
       "Read(**)",
       "Write(**/*.md)",
       "Edit(**/*.md)",
-      "Read(//$HOME/.claude/**)",
+      "Read(//$HOME/.gemini/**)",
       "Bash(git status)",
       "Bash(git diff *)",
       "Bash(git log *)",
