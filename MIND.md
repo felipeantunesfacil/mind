@@ -8,4 +8,4 @@ Configuração inicial de funcionamento (idioma, como chamar o usuário, fuso ho
 
 ## Nós
 
-_Nenhum nó ainda — os primeiros surgem conforme você usa o Mind._
+- [projetos/letramento-facil/letramento-facil.md](projetos/letramento-facil/letramento-facil.md) — Índice do projeto de letramento prático em IA na Fácil (Gemini, Gems, NotebookLM, Colab).
