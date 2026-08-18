@@ -8,4 +8,4 @@ Configuração inicial de funcionamento (idioma, como chamar o usuário, fuso ho
 
 ## Nós
 
-- [projetos/letramento-facil/letramento-facil.md](projetos/letramento-facil/letramento-facil.md) — Índice do projeto de letramento prático em IA na Fácil (Gemini, Gems, NotebookLM, Colab).
+- [projetos/letramento-facil.md](projetos/letramento-facil.md) — Índice do projeto de letramento prático em IA na Fácil (Gemini, Gems, NotebookLM, Colab).
